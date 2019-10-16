@@ -9,17 +9,17 @@ function App() {
         <div className="App">
             <Menu>
                 <Container>
-                  <Menu.Item as='a'>
-                    <span>Testiram</span>
-                  </Menu.Item>
-                  <Menu.Item as='a' active>
-                    <span>Active</span>
-                  </Menu.Item>
+                    <Menu.Item as='a'>
+                        <span>Testiram</span>
+                    </Menu.Item>
+                    <Menu.Item as='a' active>
+                        <span>Active</span>
+                    </Menu.Item>
                 </Container>
             </Menu>
-          <Container>
-            <Button primary>Click Here</Button>
-          </Container>
+            <Container>
+                <Button primary>Click Here</Button>
+            </Container>
         </div>
     );
 }
