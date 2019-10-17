@@ -1,27 +1,22 @@
 import React from 'react';
-import {Button, Container, Segment} from "semantic-ui-react";
-import {BrowserRouter as Router} from "react-router-dom";
+import {BrowserRouter as Router, Route, Switch} from "react-router-dom";
 
 import 'semantic-ui-css/semantic.min.css';
 import './App.css';
 
 import Header from "./Components/Header/Header";
+import HomePage from "./Pages/HomePage";
+import ProvidersPage from "./Pages/ProvidersPage";
 
 function App() {
     return (
         <Router>
             <div className="App">
                 <Header/>
-                <Container>
-                    <Segment>
-                        <Segment.Group>
-                            <Segment color='teal'>Top</Segment>
-                            <Segment color='teal'>Middle</Segment>
-                            <Segment color='black'>Bottom</Segment>
-                        </Segment.Group>
-                        <Button primary>Click Here</Button>
-                    </Segment>
-                </Container>
+                <Switch>
+                    <Route path="/" component={HomePage}/>
+                    <Route path="/providers" component={ProvidersPage}/>
+                </Switch>
             </div>
         </Router>
     );
