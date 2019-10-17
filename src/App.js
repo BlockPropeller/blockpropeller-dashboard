@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {Component} from 'react';
 import {BrowserRouter as Router, Route, Switch} from "react-router-dom";
 
 import 'semantic-ui-css/semantic.min.css';
@@ -8,18 +8,33 @@ import Header from "./Components/Header/Header";
 import HomePage from "./Pages/HomePage";
 import ProvidersPage from "./Pages/ProvidersPage";
 
-function App() {
-    return (
-        <Router>
-            <div className="App">
-                <Header/>
-                <Switch>
-                    <Route path="/" component={HomePage}/>
-                    <Route path="/providers" component={ProvidersPage}/>
-                </Switch>
-            </div>
-        </Router>
-    );
+class App extends Component {
+    constructor(props) {
+        super(props);
+
+        this.state = {
+            loggedIn: false,
+            loaded: false,
+        }
+    }
+
+    async componentDidMount() {
+
+    }
+
+    render() {
+        return (
+            <Router>
+                <div className="App">
+                    <Header/>
+                    <Switch>
+                        <Route path="/" component={HomePage}/>
+                        <Route path="/providers" component={ProvidersPage}/>
+                    </Switch>
+                </div>
+            </Router>
+        );
+    }
 }
 
 export default App;
