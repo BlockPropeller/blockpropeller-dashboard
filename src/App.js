@@ -5,6 +5,7 @@ import {Loader} from "semantic-ui-react";
 import 'semantic-ui-css/semantic.min.css';
 import './App.css';
 
+import {UserContext} from "./Common/contexts";
 import UserService from "./Services/User.service";
 
 import Header from "./Components/Header/Header";
@@ -34,8 +35,12 @@ class App extends Component {
         });
     }
 
+    handleUserLogin = async (data) => {};
+
+    handleUserRegister = async (data) => {};
+
     render() {
-        const {loggedIn, loaded} = this.state;
+        const {loggedIn, loaded, user} = this.state;
 
         if (!loaded) {
             return <div className="App">
@@ -46,11 +51,18 @@ class App extends Component {
         if (!loggedIn) {
             return <Router>
                 <div className="App">
-                    <Switch>
-                        <Route path="/login" component={LoginPage}/>
-                        <Route path="/register" component={RegisterPage}/>
-                        <Redirect to="/login"/>
-                    </Switch>
+                    <UserContext.Provider value={{
+                        user,
+                        loggedIn,
+                        loginUser: this.handleUserLogin,
+                        registerUser: this.handleUserRegister,
+                    }}>
+                        <Switch>
+                            <Route path="/login" component={LoginPage}/>
+                            <Route path="/register" component={RegisterPage}/>
+                            <Redirect to="/login"/>
+                        </Switch>
+                    </UserContext.Provider>
                 </div>
             </Router>
         }
