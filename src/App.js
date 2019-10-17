@@ -5,6 +5,8 @@ import {Loader} from "semantic-ui-react";
 import 'semantic-ui-css/semantic.min.css';
 import './App.css';
 
+import UserService from "./Services/User.service";
+
 import Header from "./Components/Header/Header";
 import HomePage from "./Pages/HomePage";
 import ProvidersPage from "./Pages/ProvidersPage";
@@ -23,7 +25,13 @@ class App extends Component {
     }
 
     async componentDidMount() {
+        const user = await UserService.getUser();
 
+        this.setState({
+            loaded: true,
+            user,
+            loggedIn: !!user,
+        });
     }
 
     render() {
