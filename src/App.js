@@ -1,26 +1,29 @@
 import React from 'react';
-import {Button, Container, Menu} from "semantic-ui-react";
+import {Button, Container, Segment} from "semantic-ui-react";
+import {BrowserRouter as Router} from "react-router-dom";
 
 import 'semantic-ui-css/semantic.min.css';
 import './App.css';
 
+import Header from "./Components/Header/Header";
+
 function App() {
     return (
-        <div className="App">
-            <Menu>
+        <Router>
+            <div className="App">
+                <Header/>
                 <Container>
-                    <Menu.Item as='a'>
-                        <span>Testiram</span>
-                    </Menu.Item>
-                    <Menu.Item as='a' active>
-                        <span>Active</span>
-                    </Menu.Item>
+                    <Segment>
+                        <Segment.Group>
+                            <Segment color='teal'>Top</Segment>
+                            <Segment color='teal'>Middle</Segment>
+                            <Segment color='black'>Bottom</Segment>
+                        </Segment.Group>
+                        <Button primary>Click Here</Button>
+                    </Segment>
                 </Container>
-            </Menu>
-            <Container>
-                <Button primary>Click Here</Button>
-            </Container>
-        </div>
+            </div>
+        </Router>
     );
 }
 
