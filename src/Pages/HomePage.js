@@ -1,32 +1,35 @@
 import React, {Component} from 'react';
-import {Button, Container, Header, Segment} from "semantic-ui-react";
+import {Button, Container, Header, Loader, Segment} from "semantic-ui-react";
 import {ServerService} from "../Services";
 
 class HomePage extends Component {
-    constructor(props) {
-        super(props);
-
-        this.state = {};
-    }
+    state = {
+        servers: [],
+        loaded: false,
+    };
 
     async componentDidMount() {
         const servers = await ServerService.getAllServers();
 
-        console.log(servers);
+        this.setState({
+            servers,
+            loaded: true,
+        });
     }
 
     render() {
+        const {servers, loaded} = this.state;
+
         return (
             <div>
                 <Container>
                     <Segment>
+                        <Loader active={!loaded}/>
                         <Header>
                             Servers
                         </Header>
                         <Segment.Group>
-                            <Segment color='teal'>Top</Segment>
-                            <Segment color='teal'>Middle</Segment>
-                            <Segment color='black'>Bottom</Segment>
+                            {servers.map(server => <Segment key={server.id} color='teal'>Server</Segment>)}
                         </Segment.Group>
                         <Button primary>Click Here</Button>
                     </Segment>

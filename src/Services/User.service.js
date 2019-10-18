@@ -4,7 +4,7 @@ import Api from '../Common/Api';
 class UserService {
     static async getUser() {
         try {
-            const {data} = await Api.get('/account/me');
+            const {data} = await Api.get('/api/v1/account/me');
 
             if (!data || !data.account) {
                 return null;
@@ -19,10 +19,19 @@ class UserService {
 
     static async loginUser(email, password) {
         try {
+            const {data} = await Api.post('/login', {
+                email,
+                password,
+            });
 
+            if (!data || !data.token) {
+                return null;
+            }
+
+            return data.token;
         } catch (error) {
             console.error(error);
-            return false;
+            return null;
         }
     }
 

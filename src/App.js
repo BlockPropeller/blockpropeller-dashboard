@@ -31,8 +31,6 @@ class App extends Component {
 
         let user;
 
-        console.log(tokenCookie);
-
         if (tokenCookie) {
             UserService.setJwtToken(tokenCookie);
 
@@ -46,12 +44,27 @@ class App extends Component {
         });
     }
 
-    handleUserLogin = async (data) => {};
+    handleUserLogin = async ({email, password}) => {
+        const userToken = await UserService.loginUser(email, password);
+
+        if (userToken) {
+            UserService.setJwtToken(userToken);
+
+            const user = await UserService.getUser();
+
+            this.setState({
+                user,
+                loggedIn: !!user,
+            });
+        }
+    };
 
     handleUserRegister = async (data) => {};
 
     render() {
         const {loggedIn, loaded, user} = this.state;
+
+        console.log(user);
 
         if (!loaded) {
             return <div className="App">

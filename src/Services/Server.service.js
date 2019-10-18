@@ -3,7 +3,7 @@ import Api from '../Common/Api';
 class ServerService {
     static async getAllServers() {
         try {
-            const {data} = await Api.get("/server");
+            const {data} = await Api.get("/api/v1/server");
 
             if (!data || !data.servers) {
                 return [];
