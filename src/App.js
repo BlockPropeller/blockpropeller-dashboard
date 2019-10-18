@@ -7,7 +7,7 @@ import 'semantic-ui-css/semantic.min.css';
 import './App.css';
 
 import {UserContext} from "./Common/contexts";
-import UserService from "./Services/User.service";
+import {UserService} from "./Services";
 
 import Header from "./Components/Header/Header";
 import HomePage from "./Pages/HomePage";
