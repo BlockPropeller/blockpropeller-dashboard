@@ -14,6 +14,10 @@ import HomePage from "./Pages/HomePage";
 import ProvidersPage from "./Pages/ProvidersPage";
 import LoginPage from "./Pages/LoginPage";
 import RegisterPage from "./Pages/RegisterPage";
+import CreateServerPage from "./Pages/CreateServerPage";
+import CreateProviderPage from "./Pages/CreateProviderPage";
+import ServerPage from "./Pages/ServerPage";
+import ProviderPage from "./Pages/ProviderPage";
 
 class App extends Component {
     constructor(props) {
@@ -95,8 +99,11 @@ class App extends Component {
                     <Header/>
                     <Switch>
                         <Route path="/" exact component={HomePage}/>
-                        <Route path="/server/create" exact component={HomePage}/>
+                        <Route path="/server/create" exact component={CreateServerPage}/>
+                        <Route path="/server/:id" exact component={ServerPage}/>
                         <Route path="/providers" component={ProvidersPage}/>
+                        <Route path="/provider/create" exact component={CreateProviderPage}/>
+                        <Route path="/provider/:id" component={ProviderPage}/>
                         <Redirect to="/"/>
                     </Switch>
                 </div>

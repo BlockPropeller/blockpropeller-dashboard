@@ -1,13 +1,13 @@
 import React, {Component} from 'react';
 
-class ProvidersPage extends Component {
+class ServerPage extends Component {
     render() {
         return (
             <div>
-                ProvidersPage
+                ServerPage
             </div>
         );
     }
 }
 
-export default ProvidersPage;
+export default ServerPage;

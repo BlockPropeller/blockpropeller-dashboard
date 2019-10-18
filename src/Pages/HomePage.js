@@ -22,32 +22,30 @@ class HomePage extends Component {
         const {servers, loaded} = this.state;
 
         return (
-            <div>
-                <Container>
-                    <Segment>
-                        <div>
-                            <Header as='h3' style={{margin: '0'}}>
-                                Servers
-                            </Header>
-                            <p>qweqweqwe</p>
-                        </div>
-                        {servers.length > 0 && <Segment.Group>
-                            {servers.map(server => <Segment key={server.id} color='teal'>Server</Segment>)}
-                            <Button primary>Click Here</Button>
-                        </Segment.Group>}
-                        {servers.length === 0 && <Segment placeholder>
-                            <Header icon>
-                                <Icon name='pdf file outline' />
-                                No servers have been created yet
-                            </Header>
-                            <Link to="/server/create">
-                                <Button primary>Create Server</Button>
-                            </Link>
-                        </Segment>}
-                        <Loader active={!loaded}/>
-                    </Segment>
-                </Container>
-            </div>
+            <Container>
+                <Segment>
+                    <div>
+                        <Header as='h3' style={{margin: '0'}}>
+                            Servers
+                        </Header>
+                        <p>qweqweqwe</p>
+                    </div>
+                    {servers.length > 0 && <Segment.Group>
+                        {servers.map(server => <Segment key={server.id} color='teal'>Server</Segment>)}
+                        <Button primary>Click Here</Button>
+                    </Segment.Group>}
+                    {servers.length === 0 && <Segment placeholder>
+                        <Header icon>
+                            <Icon name='server' />
+                            No servers have been created yet
+                        </Header>
+                        <Link to="/server/create">
+                            <Button primary>Create Server</Button>
+                        </Link>
+                    </Segment>}
+                    <Loader active={!loaded}/>
+                </Segment>
+            </Container>
         );
     }
 }

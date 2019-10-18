@@ -1,13 +1,13 @@
 import React, {Component} from 'react';
 
-class ProvidersPage extends Component {
+class CreateProviderPage extends Component {
     render() {
         return (
             <div>
-                ProvidersPage
+                c provider
             </div>
         );
     }
 }
 
-export default ProvidersPage;
+export default CreateProviderPage;
