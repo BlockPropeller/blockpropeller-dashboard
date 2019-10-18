@@ -64,8 +64,6 @@ class App extends Component {
     render() {
         const {loggedIn, loaded, user} = this.state;
 
-        console.log(user);
-
         if (!loaded) {
             return <div className="App">
                 <Loader active  size='large'>Loading Application</Loader>

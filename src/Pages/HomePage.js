@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {Button, Container, Header, Loader, Segment} from "semantic-ui-react";
+import {Button, Container, Header, Icon, Loader, Segment} from "semantic-ui-react";
 import {ServerService} from "../Services";
 
 class HomePage extends Component {
@@ -24,14 +24,24 @@ class HomePage extends Component {
             <div>
                 <Container>
                     <Segment>
-                        <Loader active={!loaded}/>
-                        <Header>
-                            Servers
-                        </Header>
-                        <Segment.Group>
+                        <div>
+                            <Header as='h3' style={{margin: '0'}}>
+                                Servers
+                            </Header>
+                            <p>qweqweqwe</p>
+                        </div>
+                        {servers.length > 0 && <Segment.Group>
                             {servers.map(server => <Segment key={server.id} color='teal'>Server</Segment>)}
-                        </Segment.Group>
-                        <Button primary>Click Here</Button>
+                            <Button primary>Click Here</Button>
+                        </Segment.Group>}
+                        {servers.length === 0 && <Segment placeholder>
+                            <Header icon>
+                                <Icon name='pdf file outline' />
+                                No servers have been created yet
+                            </Header>
+                            <Button primary>Create Server</Button>
+                        </Segment>}
+                        <Loader active={!loaded}/>
                     </Segment>
                 </Container>
             </div>

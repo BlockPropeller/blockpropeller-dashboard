@@ -11,7 +11,7 @@ const Header = () => {
                 </Menu.Item>
                 <NavLink to="/">
                     <Menu.Item>
-                        <span>Home</span>
+                        <span>Servers</span>
                     </Menu.Item>
                 </NavLink>
                 <NavLink to="/providers">
