@@ -1,7 +1,6 @@
 import React, {Component} from 'react';
 import {Container, Header, Loader, Segment, Table} from "semantic-ui-react";
 import {ProviderService} from "../Services";
-import {Link} from "react-router-dom";
 
 class ProvidersPage extends Component {
     state = {

@@ -1,10 +1,15 @@
-import React from 'react';
+import React, {Component} from 'react';
 import {NavLink} from "react-router-dom";
 import {Container, Menu} from "semantic-ui-react";
+import {UserContext} from "../../Common/contexts";
 
-const Header = () => {
-    return (
-        <Menu>
+class Header extends Component {
+    static contextType = UserContext;
+
+    render() {
+        const {user, logoutUser} = this.context;
+
+        return <Menu>
             <Container>
                 <Menu.Item>
                     <span>Logo</span>
@@ -19,9 +24,13 @@ const Header = () => {
                         <span>Providers</span>
                     </Menu.Item>
                 </NavLink>
+                <div>
+                    <div>{user.email}</div>
+                    <div onClick={logoutUser}>Logout</div>
+                </div>
             </Container>
-        </Menu>
-    );
-};
+        </Menu>;
+    }
+}
 
 export default Header;

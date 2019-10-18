@@ -7,7 +7,6 @@ class RegisterPage extends Component {
     static contextType = UserContext;
 
     handleFormSubmit = (data) => {
-        console.log(data);
     };
 
     render() {

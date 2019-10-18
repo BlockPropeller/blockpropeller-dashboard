@@ -63,6 +63,15 @@ class App extends Component {
         }
     };
 
+    handleUserLogout = () => {
+        UserService.logoutUser();
+
+        this.setState({
+            user: null,
+            loggedIn: false,
+        });
+    };
+
     handleUserRegister = async (data) => {};
 
     render() {
@@ -81,6 +90,7 @@ class App extends Component {
                         user,
                         loggedIn,
                         loginUser: this.handleUserLogin,
+                        logoutUser: this.handleUserLogout,
                         registerUser: this.handleUserRegister,
                     }}>
                         <Switch>
@@ -95,18 +105,26 @@ class App extends Component {
 
         return (
             <Router>
-                <div className="App">
-                    <Header/>
-                    <Switch>
-                        <Route path="/" exact component={HomePage}/>
-                        <Route path="/server/create" exact component={CreateServerPage}/>
-                        <Route path="/server/:id" exact component={ServerPage}/>
-                        <Route path="/providers" component={ProvidersPage}/>
-                        <Route path="/provider/create" exact component={CreateProviderPage}/>
-                        <Route path="/provider/:id" component={ProviderPage}/>
-                        <Redirect to="/"/>
-                    </Switch>
-                </div>
+                <UserContext.Provider value={{
+                    user,
+                    loggedIn,
+                    loginUser: this.handleUserLogin,
+                    logoutUser: this.handleUserLogout,
+                    registerUser: this.handleUserRegister,
+                }}>
+                    <div className="App">
+                        <Header/>
+                        <Switch>
+                            <Route path="/" exact component={HomePage}/>
+                            <Route path="/server/create" exact component={CreateServerPage}/>
+                            <Route path="/server/:id" exact component={ServerPage}/>
+                            <Route path="/providers" component={ProvidersPage}/>
+                            <Route path="/provider/create" exact component={CreateProviderPage}/>
+                            <Route path="/provider/:id" component={ProviderPage}/>
+                            <Redirect to="/"/>
+                        </Switch>
+                    </div>
+                </UserContext.Provider>
             </Router>
         );
     }

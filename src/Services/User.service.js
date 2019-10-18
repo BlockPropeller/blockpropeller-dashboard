@@ -35,7 +35,9 @@ class UserService {
         }
     }
 
-    static async logoutUser() {}
+    static logoutUser() {
+        UserService.removeJwtToken();
+    }
 
     static async registerUser(email, password) {}
 
