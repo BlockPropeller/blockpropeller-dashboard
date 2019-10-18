@@ -94,8 +94,10 @@ class App extends Component {
                 <div className="App">
                     <Header/>
                     <Switch>
-                        <Route path="/" component={HomePage}/>
+                        <Route path="/" exact component={HomePage}/>
+                        <Route path="/server/create" exact component={HomePage}/>
                         <Route path="/providers" component={ProvidersPage}/>
+                        <Redirect to="/"/>
                     </Switch>
                 </div>
             </Router>

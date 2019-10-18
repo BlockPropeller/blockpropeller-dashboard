@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import {Button, Container, Header, Icon, Loader, Segment} from "semantic-ui-react";
 import {ServerService} from "../Services";
+import {Link} from "react-router-dom";
 
 class HomePage extends Component {
     state = {
@@ -39,7 +40,9 @@ class HomePage extends Component {
                                 <Icon name='pdf file outline' />
                                 No servers have been created yet
                             </Header>
-                            <Button primary>Create Server</Button>
+                            <Link to="/server/create">
+                                <Button primary>Create Server</Button>
+                            </Link>
                         </Segment>}
                         <Loader active={!loaded}/>
                     </Segment>
