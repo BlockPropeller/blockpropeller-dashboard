@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import {BrowserRouter as Router, Redirect, Route, Switch} from "react-router-dom";
 import {Loader} from "semantic-ui-react";
+import Cookies from 'js-cookie';
 
 import 'semantic-ui-css/semantic.min.css';
 import './App.css';
@@ -26,11 +27,21 @@ class App extends Component {
     }
 
     async componentDidMount() {
-        const user = await UserService.getUser();
+        let tokenCookie = Cookies.get('token');
+
+        let user;
+
+        console.log(tokenCookie);
+
+        if (tokenCookie) {
+            UserService.setJwtToken(tokenCookie);
+
+            user = await UserService.getUser();
+        }
 
         this.setState({
-            loaded: true,
             user,
+            loaded: true,
             loggedIn: !!user,
         });
     }
