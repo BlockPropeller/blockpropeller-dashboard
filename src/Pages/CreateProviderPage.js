@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {Container, Dimmer, Dropdown, Form, Header, Loader, Segment, Select} from "semantic-ui-react";
+import {Container, Form, Header, Segment} from "semantic-ui-react";
 import {ProviderService} from "../Services";
 
 const ProviderOptionsMap = {
@@ -34,6 +34,22 @@ class CreateProviderPage extends Component {
         });
     };
 
+    handleFormSubmission = () => {
+        const {name, credentials, type} = this.state;
+
+        if (this.isFormInvalid()) {
+            return;
+        }
+
+        console.log(name, credentials, type);
+    };
+
+    isFormInvalid = () => {
+        const {name, credentials, type} = this.state;
+
+        return !name || !credentials || !type;
+    };
+
     render() {
         const {name, credentials, type, loaded, providerOptions} = this.state;
 
@@ -43,17 +59,14 @@ class CreateProviderPage extends Component {
                     Create Provider
                 </Header>
                 <Segment>
-                    <Form>
-                        <Form.Input value={name} name="name" placeholder="Set name for this provider" onChange={this.handleFormInputChange}/>
-                        <Dropdown selection fluid value={type} name="type" placeholder='Select Provider Type' options={providerOptions}  onChange={this.handleFormInputChange}/>
+                    <Form onSubmit={this.handleFormSubmission} loading={!loaded}>
+                        <Form.Input value={name} label="Provider Name" name="name" placeholder="Set name for this provider" onChange={this.handleFormInputChange}/>
+                        <Form.Select selection fluid value={type} name="type" placeholder='Select Provider Type' options={providerOptions}  onChange={this.handleFormInputChange}/>
                         <Form.Input value={credentials} name="credentials" placeholder="Credentials (API key, token)" onChange={this.handleFormInputChange}/>
-                        <Form.Button primary>
+                        <Form.Button primary disabled={this.isFormInvalid()}>
                             Create
                         </Form.Button>
                     </Form>
-                    <Dimmer active={!loaded} inverted>
-                        <Loader inverted>Loading</Loader>
-                    </Dimmer>
                 </Segment>
             </Container>
         );
