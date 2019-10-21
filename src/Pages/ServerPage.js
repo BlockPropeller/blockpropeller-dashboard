@@ -1,11 +1,12 @@
 import React, {Component} from 'react';
+import {Container} from "semantic-ui-react";
 
 class ServerPage extends Component {
     render() {
         return (
-            <div>
+            <Container>
                 ServerPage
-            </div>
+            </Container>
         );
     }
 }

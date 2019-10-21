@@ -35,6 +35,22 @@ class ServerService {
         }
     }
 
+    static async getAllProvisioningJobs() {
+        try {
+            const {data} = await Api.get("/api/v1/provision/job");
+
+            if (!data || !data.jobs) {
+                return [];
+            }
+
+            return data.jobs;
+        } catch (error) {
+            console.error(error);
+
+            return [];
+        }
+    }
+
     static async provisionServer(providerId, network, type, version) {
         try {
             const {data} = await Api.post("/api/v1/provision/job", {
