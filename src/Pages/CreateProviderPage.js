@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import {Container, Form, Header, Segment} from "semantic-ui-react";
 import {ProviderService} from "../Services";
+import {Redirect} from "react-router-dom";
 
 const ProviderOptionsMap = {
     "digitalocean": {
@@ -13,6 +14,7 @@ const ProviderOptionsMap = {
 class CreateProviderPage extends Component {
     state = {
         loaded: false,
+        created: false,
         providerOptions: [],
         name: '',
         credentials: '',
@@ -34,14 +36,28 @@ class CreateProviderPage extends Component {
         });
     };
 
-    handleFormSubmission = () => {
+    handleFormSubmission = async () => {
         const {name, credentials, type} = this.state;
 
         if (this.isFormInvalid()) {
             return;
         }
 
-        console.log(name, credentials, type);
+        this.setState({
+            loaded: false,
+        });
+
+        const success = await ProviderService.createProvider(name, credentials, type);
+
+        if (success) {
+            this.setState({
+               created: true,
+            });
+        } else {
+            this.setState({
+                loaded: true,
+            });
+        }
     };
 
     isFormInvalid = () => {
@@ -51,7 +67,11 @@ class CreateProviderPage extends Component {
     };
 
     render() {
-        const {name, credentials, type, loaded, providerOptions} = this.state;
+        const {name, created, credentials, type, loaded, providerOptions} = this.state;
+
+        if (created) {
+            return <Redirect to="/providers"/>
+        }
 
         return (
             <Container>

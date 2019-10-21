@@ -46,11 +46,22 @@ class ProviderService {
         }
     }
 
-    static async createProvider(data) {
+    static async createProvider(name, credentials, type) {
         try {
+            const {data} = await Api.post('/api/v1/provider/settings', {
+                label: name,
+                provider_type: type,
+                credentials: credentials,
+            });
 
+            if (!data || !data.provider_settings) {
+                return false;
+            }
+
+            return true;
         } catch (error) {
             console.error(error);
+            return false;
         }
     }
 
