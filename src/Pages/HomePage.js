@@ -30,18 +30,17 @@ class HomePage extends Component {
                         </Header>
                         <p>qweqweqwe</p>
                     </div>
+                    <Link to="/server/create">
+                        <Button primary>Create Server</Button>
+                    </Link>
                     {servers.length > 0 && <Segment.Group>
                         {servers.map(server => <Segment key={server.id} color='teal'>Server</Segment>)}
-                        <Button primary>Click Here</Button>
                     </Segment.Group>}
                     {servers.length === 0 && <Segment placeholder>
                         <Header icon>
                             <Icon name='server' />
                             No servers have been created yet
                         </Header>
-                        <Link to="/server/create">
-                            <Button primary>Create Server</Button>
-                        </Link>
                     </Segment>}
                     <Loader active={!loaded}/>
                 </Segment>

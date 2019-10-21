@@ -1,11 +1,16 @@
 import React, {Component} from 'react';
 import {Container, Form, Header, Segment} from "semantic-ui-react";
-import {ProviderService} from "../Services";
+import {ProviderService, ServerService} from "../Services";
+import {Redirect} from "react-router-dom";
 
 const NODE_NETWORK_OPTIONS = [
     {
         value: 'testnet',
         text: 'Testnet',
+    },
+    {
+        value: 'prod',
+        text: 'Production',
     },
 ];
 const NODE_TYPE_OPTIONS = [
@@ -13,11 +18,9 @@ const NODE_TYPE_OPTIONS = [
         value: 'lightnode',
         text: 'Light Node',
     },
-];
-const NODE_VERSION_OPTIONS = [
     {
-        value: '0.6.1',
-        text: 'v0.6.1',
+        value: 'fullnode',
+        text: 'Full Node',
     },
 ];
 
@@ -25,10 +28,12 @@ class CreateServerPage extends Component {
     state = {
         loaded: false,
         providerOptions: [],
+        versionOptions: [],
         provider: null,
         network: null,
         type: null,
         version: null,
+        created: false,
     };
 
     async componentDidMount() {
@@ -47,6 +52,26 @@ class CreateServerPage extends Component {
     handleInputChange = (e, {name, value}) => {
         this.setState({
             [name]: value,
+        }, () => {
+            if (['network', 'type'].includes(name)) {
+                this.fetchNodeVersions();
+            }
+        });
+    };
+
+    fetchNodeVersions = () => {
+        const {network, type} = this.state;
+
+        if (!network || !type) return;
+
+        const versions = ServerService.getVersionsForNode(type, network);
+
+        this.setState({
+            version: null,
+            versionOptions: versions.map(version => ({
+                text: `v${version}`,
+                value: version,
+            }))
         });
     };
 
@@ -57,7 +82,14 @@ class CreateServerPage extends Component {
             return;
         }
 
-        console.log(version, type, network, provider);
+        const job = await ServerService.provisionServer(provider, network, type, version);
+
+        if (job) {
+            this.setState({
+                created: true,
+                createdJob: job,
+            });
+        }
     };
 
     isFormInvalid = () => {
@@ -67,7 +99,11 @@ class CreateServerPage extends Component {
     };
 
     render() {
-        const {loaded, version, type, providerOptions, network, provider} = this.state;
+        const {loaded, created, version, type, providerOptions, versionOptions, network, provider} = this.state;
+
+        if (created) {
+            return <Redirect to="/"/>;
+        }
 
         return (
             <Container>
@@ -78,7 +114,7 @@ class CreateServerPage extends Component {
                         <Form.Select value={provider} name="provider" options={providerOptions} placeholder="Select provider" label="Provider" onChange={this.handleInputChange}/>
                         <Form.Select value={network} name="network" options={NODE_NETWORK_OPTIONS} placeholder="Select network" label="Node Network" onChange={this.handleInputChange}/>
                         <Form.Select value={type} name="type" options={NODE_TYPE_OPTIONS} placeholder="Select node type" label="Node Type" onChange={this.handleInputChange}/>
-                        <Form.Select value={version} name="version" options={NODE_VERSION_OPTIONS} placeholder="Select version of node" label="Node Version" onChange={this.handleInputChange}/>
+                        <Form.Select value={version} name="version" options={versionOptions} disabled={!type || !network} placeholder="Select version of node" label="Node Version" onChange={this.handleInputChange}/>
                         <Form.Button primary disabled={this.isFormInvalid()}>
                             Provision Server
                         </Form.Button>
