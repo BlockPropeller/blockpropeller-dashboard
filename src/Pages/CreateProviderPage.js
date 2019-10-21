@@ -80,9 +80,9 @@ class CreateProviderPage extends Component {
                 </Header>
                 <Segment>
                     <Form onSubmit={this.handleFormSubmission} loading={!loaded}>
-                        <Form.Input value={name} label="Provider Name" name="name" placeholder="Set name for this provider" onChange={this.handleFormInputChange}/>
-                        <Form.Select selection fluid value={type} name="type" placeholder='Select Provider Type' options={providerOptions}  onChange={this.handleFormInputChange}/>
-                        <Form.Input value={credentials} name="credentials" placeholder="Credentials (API key, token)" onChange={this.handleFormInputChange}/>
+                        <Form.Select selection fluid label="Provider" value={type} name="type" placeholder='Select Provider Type' options={providerOptions}  onChange={this.handleFormInputChange}/>
+                        <Form.Input value={name} label="Name" name="name" placeholder="Set name for this provider" onChange={this.handleFormInputChange}/>
+                        <Form.Input value={credentials} label="Credentials" name="credentials" placeholder="Credentials (API key, token)" onChange={this.handleFormInputChange}/>
                         <Form.Button primary disabled={this.isFormInvalid()}>
                             Create
                         </Form.Button>
