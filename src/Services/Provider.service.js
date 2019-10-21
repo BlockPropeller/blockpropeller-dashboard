@@ -3,9 +3,16 @@ import Api from '../Common/Api';
 class ProviderService {
     static async getSupportedProviders() {
         try {
+            const {data} = await Api.get('/api/v1/provider/types');
 
+            if (!data || !data.provider_types) {
+                return [];
+            }
+
+            return data.provider_types;
         } catch (error) {
             console.error(error);
+            return [];
         }
     }
 

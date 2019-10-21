@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
-import {Container, Header, Loader, Segment, Table} from "semantic-ui-react";
+import {Button, Container, Header, Loader, Segment, Table} from "semantic-ui-react";
 import {ProviderService} from "../Services";
+import {Link} from "react-router-dom";
 
 class ProvidersPage extends Component {
     state = {
@@ -33,6 +34,9 @@ class ProvidersPage extends Component {
                 </Header>
                 <Segment>
                     <Header as="h3">List of active providers</Header>
+                    <Link to="/provider/create">
+                        <Button primary>Add new Provider</Button>
+                    </Link>
                     {providers.length > 0 && <Table selectable>
                         <Table.Header>
                             <Table.Row>
