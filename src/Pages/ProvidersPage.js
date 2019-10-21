@@ -40,16 +40,16 @@ class ProvidersPage extends Component {
                     {providers.length > 0 && <Table selectable>
                         <Table.Header>
                             <Table.Row>
-                                <Table.HeaderCell>ID</Table.HeaderCell>
                                 <Table.HeaderCell>Label</Table.HeaderCell>
                                 <Table.HeaderCell>Type</Table.HeaderCell>
+                                <Table.HeaderCell>ID</Table.HeaderCell>
                             </Table.Row>
                         </Table.Header>
                         <Table.Body>
                             {providers.map(provider => <Table.Row key={provider.id} onClick={() => this.handleRowClick(provider)}>
-                                <Table.Cell>{provider.id}</Table.Cell>
                                 <Table.Cell>{provider.label}</Table.Cell>
                                 <Table.Cell>{provider.type}</Table.Cell>
+                                <Table.Cell>{provider.id}</Table.Cell>
                             </Table.Row>)}
                         </Table.Body>
                     </Table>}
