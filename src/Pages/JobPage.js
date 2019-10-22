@@ -23,7 +23,7 @@ class JobPage extends Component {
     }
 
     render() {
-        const {loaded, job} = this.state;
+        const {job} = this.state;
 
         return (
             <Container>

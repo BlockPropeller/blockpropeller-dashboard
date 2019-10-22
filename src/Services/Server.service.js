@@ -19,8 +19,22 @@ class ServerService {
             return data.servers;
         } catch (error) {
             console.error(error);
-
             return [];
+        }
+    }
+
+    static async getServer(serverId) {
+        try {
+            const {data} = await Api.get(`/api/v1/server/${serverId}`);
+
+            if (!data || !data.server) {
+                return null;
+            }
+
+            return data.server;
+        } catch (error) {
+            console.error(error);
+            return null;
         }
     }
 
