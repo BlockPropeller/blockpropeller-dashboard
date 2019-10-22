@@ -14,22 +14,29 @@ class Header extends Component {
         return <Menu>
             <Container>
                 <Menu.Item>
-                    <img src={Logo} width={40} heigh="40" alt="BlockPropeller Logo"/>
+                    <img src={Logo} style={{
+                        borderRadius: '4px',
+                        marginRight: '10px',
+                    }} width={40} heigh="40" alt="BlockPropeller Logo"/>
                     <strong>BlockPropeller</strong>
                 </Menu.Item>
-                <NavLink to="/">
-                    <Menu.Item>
-                        <span>Servers</span>
-                    </Menu.Item>
-                </NavLink>
-                <NavLink to="/providers">
-                    <Menu.Item>
-                        <span>Providers</span>
-                    </Menu.Item>
-                </NavLink>
-                <div>
-                    <div>{user.email}</div>
-                    <div onClick={logoutUser}>Logout</div>
+                <Menu.Item as={NavLink} to="/" exact>
+                    <span>Servers</span>
+                </Menu.Item>
+                <Menu.Item as={NavLink} to="/providers">
+                    <span>Providers</span>
+                </Menu.Item>
+                <div style={{
+                    marginLeft: 'auto',
+                    textAlign: 'right',
+                    padding: '10px',
+                }}>
+                    <div><strong>{user.email}</strong></div>
+                    <div style={{
+                        color: '#4183c4',
+                        marginTop: '2px',
+                        cursor: 'pointer',
+                    }} onClick={logoutUser}>Logout</div>
                 </div>
             </Container>
         </Menu>;

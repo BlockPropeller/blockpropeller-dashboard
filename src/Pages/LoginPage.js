@@ -3,6 +3,7 @@ import {Form, Grid, Message, Segment} from "semantic-ui-react";
 import {Link} from "react-router-dom";
 
 import {UserContext} from "../Common/contexts";
+import Logo from "../Components/Header/LogoSymbol.jpg";
 
 class LoginPage extends Component {
     static contextType = UserContext;
@@ -29,6 +30,10 @@ class LoginPage extends Component {
         return (
             <Grid textAlign='center' style={{ height: '100vh' }} verticalAlign='middle'>
                 <Grid.Column style={{ maxWidth: 450 }}>
+                    <img src={Logo} width={120} height={120} alt="BlockPropeller Logo" style={{
+                        marginBottom: '30px',
+                        borderRadius: '8px',
+                    }}/>
                     <Form size='large' onSubmit={this.handleFormSubmit}>
                         <Segment stacked>
                             <Form.Input value={email} onChange={this.handleChange} fluid icon='user' iconPosition='left' name="email" placeholder='E-mail address' />
