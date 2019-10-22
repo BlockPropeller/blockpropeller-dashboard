@@ -1,7 +1,9 @@
 import React, {Component, Fragment} from 'react';
-import {Button, Container, Grid, Header, Icon, Label, Loader, Segment} from "semantic-ui-react";
+import {Button, Container, Grid, Header, Icon, Loader, Segment} from "semantic-ui-react";
 import {ServerService} from "../Services";
 import {Link} from "react-router-dom";
+import JobStatusLabel from "../Components/JobStatusLabel/JobStatusLabel";
+import ServerStateLabel from "../Components/ServerStateLabel/ServerStateLabel";
 
 class HomePage extends Component {
     state = {
@@ -24,6 +26,10 @@ class HomePage extends Component {
     render() {
         const {servers, jobs, loaded} = this.state;
 
+        if (!loaded) {
+            return <Loader active  size='large'>Loading Servers</Loader>;
+        }
+
         return (
             <Container>
                 <Header as='h1'>
@@ -37,18 +43,7 @@ class HomePage extends Component {
                                     <Grid.Column>{server.name}</Grid.Column>
                                     <Grid.Column>{server.created_at}</Grid.Column>
                                     <Grid.Column>
-                                        {server.state === 'requested' && <Label color="orange">
-                                            Provisioning Server
-                                        </Label>}
-                                        {server.state === 'ok' && <Label color="green">
-                                            Running
-                                        </Label>}
-                                        {server.state === 'deleted' && <Label color="grey">
-                                            Archived
-                                        </Label>}
-                                        {server.state === 'failed' && <Label color="red">
-                                            Provision Failed
-                                        </Label>}
+                                        <ServerStateLabel server={server}/>
                                     </Grid.Column>
                                 </Grid.Row>
                             </Grid>
@@ -76,18 +71,7 @@ class HomePage extends Component {
                                     <Grid.Row>
                                         <Grid.Column>{job.id}</Grid.Column>
                                         <Grid.Column>
-                                            {job.state === 'job_created' && <Label color="orange">
-                                                Creating Server
-                                            </Label>}
-                                            {job.state === 'server_created' && <Label color="orange">
-                                                Running Provision
-                                            </Label>}
-                                            {job.state === 'completed' && <Label color="green">
-                                                Provision Completed
-                                            </Label>}
-                                            {job.state === 'failed' && <Label color="red">
-                                                Provision Failed
-                                            </Label>}
+                                            <JobStatusLabel job={job}/>
                                         </Grid.Column>
                                         <Grid.Column>{job.server.name}</Grid.Column>
                                     </Grid.Row>
