@@ -23,8 +23,6 @@ class ServerPage extends Component {
     render() {
         const {server} = this.state;
 
-        console.log(server);
-
         return (
             <Container>
                 <Header as="h1">Server</Header>

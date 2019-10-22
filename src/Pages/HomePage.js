@@ -35,50 +35,45 @@ class HomePage extends Component {
                 <Header as='h1'>
                     Servers
                 </Header>
-                <Segment>
-                    {servers.length > 0 && <Segment.Group>
-                        {servers.map(server => <Segment key={server.id} as={Link} style={{display:'block'}}  to={`/server/${server.id}`}>
+                <Link to="/server/create">
+                    <Button secondary>Create New Server</Button>
+                </Link>
+                {servers.length > 0 && <Segment.Group>
+                    {servers.map(server => <Segment key={server.id} as={Link} style={{display:'block'}}  to={`/server/${server.id}`}>
+                        <Grid columns="equal">
+                            <Grid.Row verticalAlign="middle">
+                                <Grid.Column><strong><Header as='h4'>{server.name}</Header></strong></Grid.Column>
+                                <Grid.Column>{server.created_at}</Grid.Column>
+                                <Grid.Column>
+                                    <ServerStateLabel server={server}/>
+                                </Grid.Column>
+                            </Grid.Row>
+                        </Grid>
+                    </Segment>)}
+                </Segment.Group>}
+                {servers.length === 0 && <Segment placeholder>
+                    <Header icon>
+                        <Icon name='server' />
+                        No servers have been created yet
+                    </Header>
+                </Segment>}
+                {jobs.length > 0 && <Fragment>
+                    <Header as='h1'>
+                        Provisioning Jobs
+                    </Header>
+                    <Segment.Group>
+                        {jobs.map(job => <Segment key={job.id} as={Link} style={{display:'block'}}  to={`/job/${job.id}`}>
                             <Grid columns="equal">
-                                <Grid.Row>
-                                    <Grid.Column>{server.name}</Grid.Column>
-                                    <Grid.Column>{server.created_at}</Grid.Column>
+                                <Grid.Row verticalAlign="middle">
+                                    <Grid.Column>{job.id}</Grid.Column>
                                     <Grid.Column>
-                                        <ServerStateLabel server={server}/>
+                                        <JobStatusLabel job={job}/>
                                     </Grid.Column>
+                                    <Grid.Column>{job.server.name}</Grid.Column>
                                 </Grid.Row>
                             </Grid>
                         </Segment>)}
-                    </Segment.Group>}
-                    {servers.length === 0 && <Segment placeholder>
-                        <Header icon>
-                            <Icon name='server' />
-                            No servers have been created yet
-                        </Header>
-                    </Segment>}
-                    <Link to="/server/create">
-                        <Button primary>Create New Server</Button>
-                    </Link>
-                    <Loader active={!loaded}/>
-                </Segment>
-                {jobs.length > 0 && <Fragment>
-                    <Header as='h1'>
-                        Active Provision Jobs
-                    </Header>
-                    <Segment>
-                        <Segment.Group>
-                            {jobs.map(job => <Segment key={job.id} as={Link} style={{display:'block'}}  to={`/job/${job.id}`}>
-                                <Grid columns="equal">
-                                    <Grid.Row>
-                                        <Grid.Column>{job.id}</Grid.Column>
-                                        <Grid.Column>
-                                            <JobStatusLabel job={job}/>
-                                        </Grid.Column>
-                                        <Grid.Column>{job.server.name}</Grid.Column>
-                                    </Grid.Row>
-                                </Grid>
-                            </Segment>)}
-                        </Segment.Group>
-                    </Segment>
+                    </Segment.Group>
                 </Fragment>}
             </Container>
         );
