@@ -44,12 +44,6 @@ class ServerPage extends Component {
                                     <Label>{server.provider}</Label>
                                 </Grid.Column>
                             </Grid.Row>
-                            {!!server.ip_address && <Grid.Row>
-                                <Grid.Column>
-                                    <strong>IP Address: </strong>
-                                    <a href={`http://${server.ip_address}`} rel="noopener noreferrer" target="_blank">{server.ip_address}</a>
-                                </Grid.Column>
-                            </Grid.Row>}
                             <Grid.Row>
                                 <Grid.Column>
                                     <span>ID: </span>
@@ -62,6 +56,24 @@ class ServerPage extends Component {
                             </Grid.Row>
                         </Grid>
                     </Segment>
+                    {!!server.ip_address && <Segment>
+                        <Header as="h3">Connection
+                            <Header.Subheader>
+                                You can read more about connecting to your node in the <a href="https://docs.binance.org/api-reference/node-rpc.html"  rel="noopener noreferrer" target="_blank">official Binance documentation.</a>
+                            </Header.Subheader>
+                        </Header>
+                        <Grid>
+                            <Grid.Row>
+                                <Grid.Column width={4}>
+                                    <strong>IP Address: </strong>
+                                    <a href={`http://${server.ip_address}`} rel="noopener noreferrer" target="_blank">{server.ip_address}</a>
+                                </Grid.Column>
+                                <Grid.Column width={4}>
+                                    <a href={`http://${server.ip_address}:27147/status`} rel="noopener noreferrer" target="_blank"><strong>View Status</strong></a>
+                                </Grid.Column>
+                            </Grid.Row>
+                        </Grid>
+                    </Segment>}
                     <Segment>
                         <Header as="h3">Deployments</Header>
                         <Table>
