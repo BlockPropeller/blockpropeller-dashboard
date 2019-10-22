@@ -1,0 +1,17 @@
+{
+  "projects": {
+    "default": "blockpropeller"
+  },
+  "targets": {
+      "blockpropeller": {
+        "hosting": {
+          "production": [
+            "blockpropeller"
+          ],
+          "staging": [
+            "blockpropeller-staging"
+          ]
+        }
+      }
+    }
+}
