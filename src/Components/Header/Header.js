@@ -3,6 +3,8 @@ import {NavLink} from "react-router-dom";
 import {Container, Menu} from "semantic-ui-react";
 import {UserContext} from "../../Common/contexts";
 
+import Logo from './LogoSymbol.jpg';
+
 class Header extends Component {
     static contextType = UserContext;
 
@@ -12,7 +14,8 @@ class Header extends Component {
         return <Menu>
             <Container>
                 <Menu.Item>
-                    <span>Logo</span>
+                    <img src={Logo} width={40} heigh="40" alt="BlockPropeller Logo"/>
+                    <strong>BlockPropeller</strong>
                 </Menu.Item>
                 <NavLink to="/">
                     <Menu.Item>
