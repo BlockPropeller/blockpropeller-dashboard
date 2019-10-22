@@ -18,6 +18,7 @@ import CreateServerPage from "./Pages/CreateServerPage";
 import CreateProviderPage from "./Pages/CreateProviderPage";
 import ServerPage from "./Pages/ServerPage";
 import ProviderPage from "./Pages/ProviderPage";
+import JobPage from "./Pages/JobPage";
 
 class App extends Component {
     constructor(props) {
@@ -118,6 +119,7 @@ class App extends Component {
                             <Route path="/" exact component={HomePage}/>
                             <Route path="/server/create" exact component={CreateServerPage}/>
                             <Route path="/server/:id" exact component={ServerPage}/>
+                            <Route path="/job/:id" exact component={JobPage}/>
                             <Route path="/providers" component={ProvidersPage}/>
                             <Route path="/provider/create" exact component={CreateProviderPage}/>
                             <Route path="/provider/:id" component={ProviderPage}/>

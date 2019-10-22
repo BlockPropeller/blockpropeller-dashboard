@@ -46,8 +46,22 @@ class ServerService {
             return data.jobs;
         } catch (error) {
             console.error(error);
-
             return [];
+        }
+    }
+
+    static async getProvisioningJob(jobId) {
+        try {
+            const {data} = await Api.get(`/api/v1/provision/job/${jobId}`);
+
+            if (!data || !data.job) {
+                return null;
+            }
+
+            return data.job;
+        } catch (error) {
+            console.error(error);
+            return null;
         }
     }
 
