@@ -39,7 +39,23 @@ class UserService {
         UserService.removeJwtToken();
     }
 
-    static async registerUser(email, password) {}
+    static async registerUser(email, password) {
+        try {
+            const {data} = await Api.post('/register', {
+                email,
+                password,
+            });
+
+            if (!data || !data.token) {
+                return null;
+            }
+
+            return data.token;
+        } catch (error) {
+            console.error(error);
+            return null;
+        }
+    }
 
     static setJwtToken(jwtToken) {
         if (process.env.NODE_ENV !== 'development') {

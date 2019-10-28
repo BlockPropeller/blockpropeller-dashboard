@@ -73,7 +73,20 @@ class App extends Component {
         });
     };
 
-    handleUserRegister = async (data) => {};
+    handleUserRegister = async ({email, password}) => {
+        const userToken = await UserService.registerUser(email, password);
+
+        if (userToken) {
+            UserService.setJwtToken(userToken);
+
+            const user = await UserService.getUser();
+
+            this.setState({
+                user,
+                loggedIn: !!user,
+            });
+        }
+    };
 
     render() {
         const {loggedIn, loaded, user} = this.state;

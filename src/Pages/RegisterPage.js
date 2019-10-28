@@ -7,10 +7,25 @@ import Logo from "../Components/Header/LogoSymbol.jpg";
 class RegisterPage extends Component {
     static contextType = UserContext;
 
-    handleFormSubmit = (data) => {
+    state = {
+        email: '',
+        password: '',
     };
 
+    handleFormSubmit = () => {
+        const {email, password} = this.state;
+
+        this.context.registerUser({
+            email,
+            password,
+        });
+    };
+
+    handleChange = (e, { name, value }) => this.setState({ [name]: value });
+
     render() {
+        const {email, password} = this.state;
+
         return (
             <Grid textAlign='center' style={{ height: '100vh' }} verticalAlign='middle'>
                 <Grid.Column style={{ maxWidth: 450 }}>
@@ -20,16 +35,19 @@ class RegisterPage extends Component {
                     }}/>
                     <Form size='large' onSubmit={this.handleFormSubmit}>
                         <Segment stacked>
-                            <Form.Input fluid icon='user' iconPosition='left' placeholder='E-mail address' />
+                            <Form.Input value={email} onChange={this.handleChange} fluid icon='user' name="email" iconPosition='left' placeholder='E-mail address' />
                             <Form.Input
+                                value={password}
                                 fluid
                                 icon='lock'
+                                onChange={this.handleChange}
                                 iconPosition='left'
                                 placeholder='Password'
+                                name="password"
                                 type='password'
                             />
 
-                            <Form.Button secondary fluid size='large'>
+                            <Form.Button disabled={!email || !password} secondary fluid size='large'>
                                 Create Account
                             </Form.Button>
                         </Segment>
